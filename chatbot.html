@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML/CSS/JS ChatBot</title>
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="user-input" class="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()" class="send-button">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById('user-input').value;
+            var chatBox = document.getElementById('chat-box');
+
+            // Display user message
+            var userMessage = document.createElement('div');
+            userMessage.className = 'message user';
+            userMessage.innerText = userInput;
+            chatBox.appendChild(userMessage);
+
+            // Clear input field
+            document.getElementById('user-input').value = '';
+
+            // Generate and display bot response
+            var botResponse = generateResponse(userInput);
+            var botMessage = document.createElement('div');
+            botMessage.className = 'message bot';
+            botMessage.innerText = botResponse;
+            chatBox.appendChild(botMessage);
+
+            // Scroll to bottom of chat box
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function generateResponse(userInput) {
+            // Simple logic for bot responses (you can expand this)
+            var responses = {
+                'hi': 'Hello there!',
+                'how are you': 'I am just a bot, but thank you for asking!',
+                'bye': 'Goodbye! Have a great day!',
+            };
+
+            // Check if user input matches any predefined responses
+            for (var key in responses) {
+                if (userInput.toLowerCase().includes(key)) {
+                    return responses[key];
+                }
+            }
+
+            // Default response if no match found
+            return "I'm sorry, I didn't understand that.";
+        }
+    </script>
+</body>
+</html>
